@@ -1,7 +1,9 @@
 #!/bin/bash
 
+SCRIPTDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
 VMIDS=$(qm list | grep -v VMID | sed 's/ */ /' | cut -d' ' -f2)
 
 for VMID in $VMIDS; do
-    /usr/local/bin/start-vm.sh "$VMID"
+    "$SCRIPTDIR"/start-vm.sh "$VMID"
 done
