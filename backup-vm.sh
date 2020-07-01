@@ -9,7 +9,7 @@ fi
 
 VMIDS=$*
 
-BACKUPSTORAGE=$(pvesm status -content backup | grep -v Name | awk '{print $1}')
+BACKUPSTORAGE=$(pvesm status -content backup | grep -v Name | sort -k3 -n | head -n1 | awk '{print $1}')
 NODENAME=$(jq .nodename /etc/pve/.members | sed 's/"//g')
 
 for VMID in $VMIDS; do
