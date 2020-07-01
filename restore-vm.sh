@@ -20,7 +20,7 @@ for VMID in $VMIDS; do
         echo Remove VM "$VMID" "$VMNAME"
         qm destroy "$VMID" -purge true
 
-        BACKUPLAST=$(pvesm list "$BACKUPSTORAGE" -content backup -vmid "$VMID" | grep -v Volid | grep -c "$VMID" | tail -n1 | awk '{print $1}')
+        BACKUPLAST=$(pvesm list "$BACKUPSTORAGE" -content backup -vmid "$VMID" | grep -v Volid | grep "$VMID" | tail -n1 | awk '{print $1}')
         BACKUPPATH=$(pvesm path "$BACKUPLAST")
         echo Restore backup for "$VMID" "$VMNAME"
         qmrestore "$BACKUPPATH" "$VMID"
