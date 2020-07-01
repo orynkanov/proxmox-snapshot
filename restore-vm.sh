@@ -23,6 +23,6 @@ for VMID in $VMIDS; do
         BACKUPLAST=$(pvesm list "$BACKUPSTORAGE" -content backup -vmid "$VMID" | grep -v Volid | grep -c "$VMID" | tail -n1 | awk '{print $1}')
         BACKUPPATH=$(pvesm path "$BACKUPLAST")
         echo Restore backup for "$VMID" "$VMNAME"
-        qmrestore "$BACKUPPATH" "$VMID" --force true
+        qmrestore "$BACKUPPATH" "$VMID"
     fi
 done
