@@ -17,6 +17,7 @@ for VMID in $VMIDS; do
         echo Skip remove "$VMID" "$VMNAME" - backup not exist!
     else
         VMNAME=$(qm config "$VMID" | grep name | cut -d':' -f2)
+        "$SCRIPTDIR"/shutdown-vm.sh "$VMID"
         echo Remove VM "$VMID" "$VMNAME"
         qm destroy "$VMID" -purge true
 
