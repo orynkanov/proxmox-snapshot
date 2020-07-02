@@ -18,7 +18,6 @@ for VMID in $VMIDS; do
         VMISRUN=$(qm status "$VMID" | cut -d':' -f2 | grep -c running)
         "$SCRIPTDIR"/shutdown-vm.sh "$VMID"
         VMNAME=$(qm config "$VMID" | grep name | cut -d':' -f2)
-        "$SCRIPTDIR"/shutdown-vm.sh "$VMID"
         echo Create new backup for "$VMID" "$VMNAME"
         vzdump "$VMID" --remove 1 --storage "$BACKUPSTORAGE" --node "$NODENAME" --mode snapshot --compress zstd
         sleep 5s
